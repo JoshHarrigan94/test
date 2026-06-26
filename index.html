@@ -12,7 +12,8 @@
   <section id="hud" aria-live="polite">
     <div class="brand">
       <strong>Flock</strong>
-      <span>first playable prototype</span>
+      <span>Grow the herd. Survive the night.</span>
+      <small id="seasonLabel">Spring</small>
     </div>
     <div class="stats">
       <div><span id="dayLabel">Day 1</span><small>Day</small></div>
@@ -24,6 +25,11 @@
     </div>
   </section>
 
+  <section id="seasonBanner" class="banner hidden" aria-live="polite">
+    <span id="warningIcon">☾</span>
+    <strong id="warningText">Return home before night.</strong>
+  </section>
+
   <section id="panel">
     <button id="homeBtn" type="button">Call Home</button>
     <button id="gateBtn" type="button">Gate: Open</button>
@@ -32,11 +38,62 @@
 
   <section id="toast">Tap or drag to guide the flock.</section>
 
+  <section id="destinationInfo" class="hidden" aria-live="polite">
+    <div class="info-card">
+      <strong id="destinationTitle">Home Field</strong>
+      <p id="destinationText">Home Field — Fair food, low danger.</p>
+    </div>
+  </section>
+
+  <section id="journal" aria-live="polite">
+    <div class="info-card">
+      <div class="info-head">
+        <strong>Journal</strong>
+      </div>
+      <div id="journalEntries" class="journal-entries"></div>
+    </div>
+  </section>
+
+  <section id="sheepCard" class="hidden" aria-live="polite">
+    <div class="info-card">
+      <div class="info-head">
+        <strong id="sheepName">Clover</strong>
+        <button id="closeCardBtn" type="button" aria-label="Close sheep info">Close</button>
+      </div>
+      <p id="sheepTrait">Curious</p>
+      <div class="info-grid">
+        <div><span id="sheepAge">Adult</span><small>Age</small></div>
+        <div><span id="sheepHunger">100%</span><small>Hunger</small></div>
+        <div><span id="sheepParent">Unknown</span><small>Parent</small></div>
+        <div><span id="sheepSeason">Spring</span><small>Born</small></div>
+      </div>
+      <p id="sheepStatus">Calm</p>
+    </div>
+  </section>
+
+  <section id="startScreen" class="overlay">
+    <div class="card">
+      <h1>Flock</h1>
+      <p>Grow the herd. Survive the night.</p>
+      <button id="beginBtn" type="button">Begin</button>
+    </div>
+  </section>
+
   <section id="nightReport" class="hidden">
     <div class="card">
       <h1>Night falls</h1>
       <p id="nightText"></p>
       <button id="continueBtn" type="button">Begin next day</button>
+    </div>
+  </section>
+
+  <section id="endScreen" class="overlay hidden">
+    <div class="card">
+      <h1 id="endTitle">Season Complete</h1>
+      <p id="endText"></p>
+      <div id="finalStats" class="final-stats"></div>
+      <button id="continueMeadowBtn" type="button" class="hidden">Continue Meadow</button>
+      <button id="restartBtn" type="button">Play Again</button>
     </div>
   </section>
 

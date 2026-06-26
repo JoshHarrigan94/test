@@ -3,6 +3,8 @@
   --paper: rgba(255, 253, 242, 0.78);
   --paper-strong: rgba(255, 253, 242, 0.94);
   --line: rgba(20, 32, 19, 0.18);
+  --warn: rgba(194, 103, 52, 0.86);
+  --warn-soft: rgba(247, 197, 122, 0.84);
 }
 
 * { box-sizing: border-box; }
@@ -40,7 +42,7 @@ canvas {
   pointer-events: none;
 }
 
-.brand, .stats, #panel, #toast, .card {
+.brand, .stats, #panel, #toast, .card, .banner, .info-card {
   background: var(--paper);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
@@ -63,6 +65,15 @@ canvas {
   display: block;
   font-size: 11px;
   opacity: 0.7;
+}
+
+.brand small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.68;
 }
 
 .stats {
@@ -127,15 +138,98 @@ button:active { transform: translateY(1px); }
   opacity: 0.92;
 }
 
-#nightReport {
+#destinationInfo {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 84px);
+  width: min(310px, calc(100vw - 28px));
+}
+
+#journal {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 84px);
+  width: min(320px, calc(100vw - 28px));
+  max-height: 210px;
+}
+
+#destinationInfo strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  letter-spacing: -0.03em;
+}
+
+#destinationInfo p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.82;
+}
+
+.journal-entries {
+  display: grid;
+  gap: 6px;
+  max-height: 145px;
+  overflow: hidden;
+}
+
+.journal-entries p {
+  margin: 0;
+  padding: 7px 9px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.34);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.banner {
+  position: fixed;
+  top: calc(max(14px, env(safe-area-inset-top)) + 106px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  pointer-events: none;
+}
+
+.banner.hidden,
+.overlay.hidden,
+#nightReport.hidden,
+#sheepCard.hidden,
+#destinationInfo.hidden,
+#continueMeadowBtn.hidden {
+  display: none;
+}
+
+.banner.warn {
+  background: rgba(255, 242, 227, 0.88);
+  border-color: rgba(130, 64, 25, 0.2);
+  color: #69361a;
+}
+
+#warningIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--warn);
+  color: #fff7ef;
+  font-size: 13px;
+}
+
+#nightReport,
+.overlay {
   position: fixed;
   inset: 0;
   display: grid;
   place-items: center;
   background: rgba(5, 10, 22, 0.54);
 }
-
-#nightReport.hidden { display: none; }
 
 .card {
   width: min(430px, calc(100vw - 32px));
@@ -155,10 +249,109 @@ button:active { transform: translateY(1px); }
   line-height: 1.45;
 }
 
+#sheepCard {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  top: calc(max(14px, env(safe-area-inset-top)) + 114px);
+  width: min(260px, calc(100vw - 28px));
+}
+
+.info-card {
+  border-radius: 22px;
+  padding: 14px;
+}
+
+.info-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.info-head strong {
+  font-size: 18px;
+  letter-spacing: -0.03em;
+}
+
+.info-head button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+#sheepTrait,
+#sheepStatus {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+#sheepStatus {
+  margin-bottom: 0;
+  color: #36532b;
+}
+
+.info-grid,
+.final-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.info-grid div,
+.final-stats div {
+  padding: 9px 10px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.42);
+}
+
+.info-grid span,
+.final-stats span {
+  display: block;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.info-grid small,
+.final-stats small {
+  display: block;
+  font-size: 10px;
+  opacity: 0.68;
+}
+
+.final-stats {
+  margin: 0 0 18px;
+  text-align: left;
+}
+
 @media (max-width: 720px) {
   #hud { flex-direction: column; }
   .stats { grid-template-columns: repeat(3, minmax(58px, 1fr)); width: 100%; }
   #toast { display: none; }
   #panel { right: max(14px, env(safe-area-inset-right)); justify-content: space-between; }
+  #destinationInfo {
+    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 148px);
+    width: auto;
+  }
+  #journal {
+    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 252px);
+    width: auto;
+  }
+  .banner {
+    top: auto;
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 76px);
+    width: calc(100vw - 28px);
+    justify-content: center;
+  }
+  #sheepCard {
+    top: auto;
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 76px);
+    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
+    width: auto;
+  }
   button { flex: 1; padding: 11px 8px; }
 }
