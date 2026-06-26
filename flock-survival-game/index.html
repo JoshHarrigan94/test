@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Flock — Meadow Survival Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="game" aria-label="Flock survival game canvas"></canvas>
+
+  <section id="hud" aria-live="polite">
+    <div class="brand">
+      <strong>Flock</strong>
+      <span>first playable prototype</span>
+    </div>
+    <div class="stats">
+      <div><span id="dayLabel">Day 1</span><small>Day</small></div>
+      <div><span id="timeLabel">Dawn</span><small>Time</small></div>
+      <div><span id="sheepLabel">0</span><small>Sheep</small></div>
+      <div><span id="lambLabel">0</span><small>Lambs</small></div>
+      <div><span id="foodLabel">0%</span><small>Fed</small></div>
+      <div><span id="exploreLabel">0%</span><small>Map</small></div>
+    </div>
+  </section>
+
+  <section id="panel">
+    <button id="homeBtn" type="button">Call Home</button>
+    <button id="gateBtn" type="button">Gate: Open</button>
+    <button id="pauseBtn" type="button">Pause</button>
+  </section>
+
+  <section id="toast">Tap or drag to guide the flock.</section>
+
+  <section id="nightReport" class="hidden">
+    <div class="card">
+      <h1>Night falls</h1>
+      <p id="nightText"></p>
+      <button id="continueBtn" type="button">Begin next day</button>
+    </div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>

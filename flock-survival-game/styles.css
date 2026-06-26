@@ -1,0 +1,164 @@
+:root {
+  --ink: #142013;
+  --paper: rgba(255, 253, 242, 0.78);
+  --paper-strong: rgba(255, 253, 242, 0.94);
+  --line: rgba(20, 32, 19, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #9fcf7a;
+  color: var(--ink);
+  font-family: ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  image-rendering: pixelated;
+  cursor: crosshair;
+}
+
+#hud {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  right: max(14px, env(safe-area-inset-right));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.brand, .stats, #panel, #toast, .card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(22, 46, 20, 0.08);
+}
+
+.brand {
+  border-radius: 18px;
+  padding: 10px 13px;
+  min-width: 132px;
+}
+
+.brand strong {
+  display: block;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+}
+
+.brand span {
+  display: block;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(54px, 1fr));
+  gap: 6px;
+  border-radius: 18px;
+  padding: 7px;
+  max-width: 620px;
+}
+
+.stats div {
+  padding: 7px 9px;
+  border-radius: 13px;
+  background: rgba(255,255,255,0.32);
+  text-align: center;
+}
+
+.stats span {
+  display: block;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.stats small {
+  display: block;
+  font-size: 10px;
+  opacity: 0.68;
+}
+
+#panel {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 18px;
+}
+
+button {
+  appearance: none;
+  border: 1px solid rgba(20, 32, 19, 0.2);
+  color: var(--ink);
+  background: rgba(255,255,255,0.62);
+  border-radius: 13px;
+  padding: 10px 12px;
+  font-weight: 750;
+  font-size: 14px;
+}
+
+button:active { transform: translateY(1px); }
+
+#toast {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  border-radius: 18px;
+  padding: 12px 14px;
+  font-size: 13px;
+  max-width: 280px;
+  opacity: 0.92;
+}
+
+#nightReport {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 10, 22, 0.54);
+}
+
+#nightReport.hidden { display: none; }
+
+.card {
+  width: min(430px, calc(100vw - 32px));
+  background: var(--paper-strong);
+  border-radius: 26px;
+  padding: 24px;
+  text-align: center;
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  letter-spacing: -0.05em;
+}
+
+.card p {
+  margin: 0 0 18px;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  #hud { flex-direction: column; }
+  .stats { grid-template-columns: repeat(3, minmax(58px, 1fr)); width: 100%; }
+  #toast { display: none; }
+  #panel { right: max(14px, env(safe-area-inset-right)); justify-content: space-between; }
+  button { flex: 1; padding: 11px 8px; }
+}
